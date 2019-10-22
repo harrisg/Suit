@@ -15,14 +15,14 @@ import Cairo
 /// Replacement for FD_ZERO macro
 
 func fdZero(set: inout fd_set) {
-  set.__fds_bits = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+  set.__fds_bits = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 
 /// Replacement for FD_SET macro
 
 func fdSet(fd: Int32, set: inout fd_set) {
-  let intOffset = Int(fd / 16)
-  let bitOffset: Int = Int(fd % 16)
+  let intOffset = Int(fd / 32)
+  let bitOffset: Int = Int(fd % 32)
   let mask: Int = 1 << bitOffset
   switch intOffset {
     case 0: set.__fds_bits.0 = set.__fds_bits.0 | mask
@@ -41,6 +41,22 @@ func fdSet(fd: Int32, set: inout fd_set) {
     case 13: set.__fds_bits.13 = set.__fds_bits.13 | mask
     case 14: set.__fds_bits.14 = set.__fds_bits.14 | mask
     case 15: set.__fds_bits.15 = set.__fds_bits.15 | mask
+    case 16: set.__fds_bits.16 = set.__fds_bits.16 | mask
+    case 17: set.__fds_bits.17 = set.__fds_bits.17 | mask
+    case 18: set.__fds_bits.18 = set.__fds_bits.18 | mask
+    case 19: set.__fds_bits.19 = set.__fds_bits.19 | mask
+    case 20: set.__fds_bits.20 = set.__fds_bits.20 | mask
+    case 21: set.__fds_bits.21 = set.__fds_bits.21 | mask
+    case 22: set.__fds_bits.22 = set.__fds_bits.22 | mask
+    case 23: set.__fds_bits.23 = set.__fds_bits.23 | mask
+    case 24: set.__fds_bits.24 = set.__fds_bits.24 | mask
+    case 25: set.__fds_bits.25 = set.__fds_bits.25 | mask
+    case 26: set.__fds_bits.26 = set.__fds_bits.26 | mask
+    case 27: set.__fds_bits.27 = set.__fds_bits.27 | mask
+    case 28: set.__fds_bits.28 = set.__fds_bits.28 | mask
+    case 29: set.__fds_bits.29 = set.__fds_bits.29 | mask
+    case 30: set.__fds_bits.30 = set.__fds_bits.30 | mask
+    case 31: set.__fds_bits.31 = set.__fds_bits.31 | mask
     default: break
   }
 }
